@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <title>Script Anti-Ghosting — Template Chat Dosen by Dosbing.ai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Dosbing.ai" />
+  <meta name="description" content="55+ template chat sopan, efektif, dan anti-ghosting untuk mahasiswa. Disusun oleh Dosbing.ai." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Warna Brand Dosbing.ai */
+      --primary: #3b82f6; /* Blue 500 */
+      --primary-dark: #1d4ed8; /* Blue 700 */
+      --accent: #10B981; /* Emerald 500 */
+      --chat-bg-me: #dcf8c6; /* WhatsApp Greenish Light */
+      --chat-bg-neutral: #f0f4f8;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+    @page{
+      size: A4;
+      margin: 15mm 20mm;
+      @bottom-center {
+        content: "Dosbing.ai — Script Anti-Ghosting | Hal " counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 9pt;
+        color: #94a3b8;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{padding:0;margin:0}
+    body{
+      font-family: 'Inter', sans-serif;
+      color:var(--ink);
+      font-size:11pt;
+      line-height:1.6;
+      background: white;
+    }
+    
+    /* Typography */
+    h1,h2,h3{ page-break-after: avoid; }
+    h1{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 32pt;
+      margin:0 0 16px 0;
+      color:#1e3a8a;
+      font-weight:800;
+      letter-spacing:-0.03em;
+      line-height: 1.1;
+    }
+    h2{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18pt;
+      color: var(--primary-dark);
+      margin:32px 0 16px;
+      font-weight:700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+    h3{
+      font-size: 13pt;
+      color:#334155;
+      margin:24px 0 10px;
+      font-weight:600;
+    }
+    p{margin:8px 0}
+    
+    /* Cover Design */
+    .cover{
+      height: calc(100vh - 30mm);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      text-align:center;
+      padding:40px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbb4ff45 100%);
+      border: 8px solid white;
+      outline: 1px solid #e2e8f0;
+      box-shadow: inset 0 0 0 1px white;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Abstract shapes background */
+    .cover::before {
+      content: "";
+      position: absolute;
+      top: -10%; right: -10%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    .subtitle{
+      font-size:15pt;
+      color:var(--muted);
+      margin-top:16px;
+      font-weight:500;
+      max-width: 80%;
+      z-index: 1;
+    }
+    .brand-tag{
+      margin-top: 50px;
+      background: white;
+      padding: 12px 28px;
+      border-radius: 50px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      font-weight: 700;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      z-index: 1;
+    }
+    
+    /* TOC Design */
+    .toc{
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 2 Column layout */
+      gap: 12px;
+    }
+    .toc li {
+      margin: 0;
+    }
+    .toc a{
+      display: block;
+      padding: 8px 12px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 10pt;
+      transition: all 0.2s;
+    }
+    .toc a:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    /* Chat Bubble Design - The Core Feature */
+    .scenario-container {
+      margin-bottom: 24px;
+      page-break-inside: avoid;
+    }
+    .scenario-title {
+      font-weight: 700;
+      font-size: 10pt;
+      color: var(--muted);
+      margin-bottom: 6px;
+      margin-left: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .chat-bubble {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 0 16px 16px 16px;
+      padding: 16px;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .chat-bubble::before {
+      /* Little triangle indicator */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 8px 10px 0;
+      border-color: transparent #cbd5e1 transparent transparent;
+    }
+    .chat-bubble::after {
+       /* Inner triangle for color match */
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: -6px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 7px 9px 0;
+      border-color: transparent white transparent transparent;
+    }
+    .copy-text {
+      font-family: 'Inter', sans-serif;
+      color: #334155;
+      font-style: normal;
+    }
+    .chat-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        font-size: 8pt;
+        color: #94a3b8;
+        border-top: 1px dashed #e2e8f0;
+        padding-top: 6px;
+    }
+    
+    /* Utilities */
+    .page-break{page-break-before: always;}
+    .callout{
+      background:#eff6ff;
+      border-left: 4px solid var(--primary);
+      padding:16px;
+      border-radius:0 8px 8px 0;
+      margin:20px 0;
+      color: #1e3a8a;
+    }
+    .emoji-icon { font-size: 1.2em; vertical-align: middle; margin-right: 8px; }
+
+    /* Footer CTA Area */
+    .cta-box {
+        margin-top: 50px;
+        text-align: center;
+        padding: 40px;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: white;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    .cta-btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Print Specifics */
+    @media print {
+      body { -webkit-print-color-adjust: exact; }
+      .cover { height: 90vh; border: none; box-shadow: none; outline: none;}
+      a { text-decoration: none; color: black; }
+      .toc ul { display: block; } /* Normal list for print to avoid grid breaks */
+      .toc a { border: none; padding: 4px 0; background: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover Page -->
+  <section class="cover">
+    <div style="font-size: 60px; margin-bottom: 20px;">🎓</div>
+    <h1>Script Anti-Ghosting<br>Template Chat Dosen</h1>
+    <div class="subtitle">55+ Skenario Chat Sopan, Efektif, dan Teruji untuk Mahasiswa Pejuang Skripsi</div>
+    
+    <div class="brand-tag">
+      Disusun oleh <span>tim Template Skripsi</span>
+    </div>
+    
+    <div style="margin-top: auto; font-size: 10pt; color: var(--muted); font-weight: 500;">
+      Edisi 2026
+    </div>
+  </section>
+
+  <!-- Intro & TOC -->
+  <section class="page-break">
+    <h2 style="margin-top: 0;">👋 Selamat Datang, Pejuang Skripsi!</h2>
+    <p>Sering bingung mau mulai chat dosen dari mana? Atau takut salah ngomong terus di-<i>ghosting</i>? Dokumen ini adalah solusinya.</p>
+    <p>Kami di <b>Tim Template Skripsi</b> mengumpulkan 55+ skenario percakapan paling umum yang dihadapi mahasiswa, mulai dari minta tanda tangan hingga menghadapi dosen <i>killer</i>.</p>
+
+    <div class="callout">
+      <strong>💡 Cara Pakai:</strong>
+      <ol style="margin: 8px 0 0 0; padding-left: 20px;">
+        <li>Cari skenario yang sesuai kondisi kamu di Daftar Isi.</li>
+        <li>Copy teksnya.</li>
+        <li>Ganti bagian dalam kurung <code>[...]</code> dengan data kamu.</li>
+        <li>Kirim di jam kerja (08.00 - 16.00).</li>
+      </ol>
+    </div>
+
+    <h3>📚 Daftar Isi</h3>
+    <div class="toc">
+      <ul>
+        <li><a href="#adm">1. Administrasi Akademik</a></li>
+        <li><a href="#bim">2. Bimbingan & Skripsi/TA</a></li>
+        <li><a href="#kul">3. Perkuliahan & Nilai</a></li>
+        <li><a href="#umum">4. Komunikasi Umum & Etika</a></li>
+        <li><a href="#riset">5. Penelitian & Magang</a></li>
+        <li><a href="#khusus">6. Kondisi Khusus</a></li>
+        <li><a href="#ladder">7. Jalur Anti-Ghosting</a></li>
+        <li><a href="#etika">8. Panduan Etika</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 1) Administrasi Akademik -->
+  <section id="adm" class="page-break">
+    <h2><span class="emoji-icon">📄</span> 1) Administrasi Akademik</h2>
+    <p class="muted">Gunakan untuk keperluan surat-menyurat dan legalitas kampus.</p>
+
+    <div class="scenario-container">
+      <div class="scenario-title">1. Minta tanda tangan lembar pengesahan</div>
+      <div class="chat-bubble">
+        <p class="copy-text">“Selamat [pagi/siang], Pak/Bu [Nama Dosen]. Saya [Nama], [NIM], [Prodi] angkatan [Tahun]. Mohon izin mengajukan tanda tangan pada lembar pengesahan [Skripsi/Laporan]. Berkas sudah siap dan dapat saya titipkan di meja Bapak/Ibu atau kirim PDF. Apakah Bapak/Ibu berkenan? Terima kasih.”</p>
+        <div class="chat-info"><span>Konteks: Formal</span> <span>Action: Copy & Edit</span></div>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">2. Tanda tangan KRS/KHS</div>
+      <div class="chat-bubble">
+        <p class="copy-text">“Selamat [pagi/siang], Pak/Bu [Nama Dosen]. Saya [Nama], [NIM]. Mohon persetujuan KRS semester [X]. Link berkas: [tautan]. Tenggat dari akademik tanggal [Tanggal]. Terima kasih, Pak/Bu.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">3. Tanda tangan dokumen magang</div>
+      <div class="chat-bubble">
+        <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM]. Mohon tanda tangan surat pengantar magang untuk [Nama Perusahaan]. Dokumen digital: [tautan]. Apakah saya perlu menghadap langsung? Terima kasih.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">4. Pengajuan Judul Skripsi (ACC)</div>
+      <div class="chat-bubble">
+        <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM]. Mohon arahan terkait usulan judul skripsi: ‘[Judul]’. Latar belakang singkat: [1 kalimat]. Apakah judul ini memungkinkan untuk dilanjutkan? Terima kasih.”</p>
+      </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">5. Surat Keterangan Aktif Kuliah</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM]. Mohon bantuan tanda tangan untuk Surat Keterangan Aktif Kuliah guna keperluan [Beasiswa/Lomba]. Draft surat: [tautan]. Terima kasih sebelumnya."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">6. Permohonan Rekomendasi Beasiswa</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM]. Mohon kesediaan Bapak/Ibu memberikan rekomendasi untuk beasiswa [Nama Beasiswa]. Berikut CV dan Transkrip saya: [tautan]. Tenggat waktu [Tanggal]. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">7. Dispensasi Akademik</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM] dari kelas [Matkul]. Mohon izin dispensasi kuliah pada [Tanggal] dikarenakan [Alasan: Lomba/Delegasi]. Surat tugas terlampir: [tautan]. Saya siap mengerjakan tugas pengganti. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">8. Izin Peminjaman Lab/Ruangan</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM]. Mohon izin meminjam Laboratorium [Nama Lab] pada [Hari, Tanggal, Jam] untuk keperluan penelitian skripsi. Saya akan mematuhi SOP yang berlaku. Terima kasih."</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- 2) Bimbingan & Skripsi -->
+  <section id="bim" class="page-break">
+    <h2><span class="emoji-icon">🎓</span> 2) Bimbingan & Skripsi/TA</h2>
+    <p class="muted">Kategori paling krusial. Gunakan bahasa yang menunjukkan progres.</p>
+
+    <div class="scenario-container">
+      <div class="scenario-title">9. Mengajukan jadwal bimbingan pertama</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM], mahasiswa bimbingan Bapak/Ibu. Mohon izin mengajukan jadwal bimbingan perdana. Saya menyesuaikan waktu luang Bapak/Ibu. Draft Bab 1 saya lampirkan: [tautan]. Terima kasih.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">10. Konfirmasi kirim draft via Email</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Saya sudah mengirimkan draft Bab [X] ke email Bapak/Ibu. Subjek: [Judul Email]. Mohon arahan perbaikannya jika Bapak/Ibu sudah ada waktu luang. Terima kasih.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">11. Revisi telat dikirim</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Mohon maaf revisi Bab [X] baru dapat saya kirim hari ini karena [alasan jujur & singkat]. Berikut link revisinya: [tautan]. Saya siap menerima koreksi selanjutnya. Terima kasih.”</p>
+      </div>
+    </div>
+    
+    <div class="scenario-container">
+      <div class="scenario-title">12. Klarifikasi revisi yang membingungkan</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Terkait catatan pada halaman [X], saya ingin memastikan pemahaman saya: apakah yang dimaksud adalah [pemahamanmu]? Mohon pencerahannya agar revisi saya tepat sasaran. Terima kasih.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">13. Meminta target waktu (Deadline Management)</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Agar pengerjaan saya lebih terarah, apakah Bapak/Ibu memiliki target kapan Bab [X] ini sebaiknya saya selesaikan? Saya akan berusaha menyesuaikan ritme. Terima kasih.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">14. Konfirmasi Bimbingan Besok (H-1)</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [sore/malam], Pak/Bu. Izin mengonfirmasi kembali jadwal bimbingan besok [Hari], pukul [Jam] di [Ruangan/Zoom]. Terima kasih, sampai bertemu besok.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">15. Dosen Lupa Janji Bimbingan (Menunggu 30 Menit)</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon maaf mengganggu. Saya sudah berada di [Lokasi] sesuai jadwal bimbingan pukul [Jam]. Mungkin Bapak/Ibu sedang ada agenda mendadak. Apakah saya menunggu atau kita jadwalkan ulang? Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">16. Laporan Progress Mingguan</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Izin melaporkan progress skripsi pekan ini: 1. [Poin 1], 2. [Poin 2]. Kendala saat ini di [Kendala]. Mohon arahan jika ada hal yang perlu saya prioritaskan. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">17. Meminta Rujukan/Jurnal</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Terkait topik [Topik], apakah Bapak/Ibu memiliki rekomendasi jurnal atau buku referensi utama? Saya kesulitan menemukan sumber yang valid untuk bagian [Bagian]. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">18. Persetujuan Seminar Proposal (Sempro)</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Berdasarkan revisi terakhir, apakah draft proposal saya sudah layak untuk diajukan Seminar Proposal? Jika iya, mohon tanda tangan pada lembar persetujuan terlampir. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">19. Mengundang Dosen Penguji</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu [Nama]. Saya [Nama], mahasiswa bimbingan Pak/Bu [Pembimbing]. Mohon kesediaan Bapak/Ibu menjadi Dosen Penguji pada sidang saya: [Hari, Tanggal, Jam]. Draft skripsi: [tautan]. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">20. Ucapan Terima Kasih Pasca Sidang</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Terima kasih banyak atas masukan saat sidang tadi. Saya akan segera mengerjakan revisi sesuai catatan Bapak/Ibu dan mengumpulkan kembali dalam [Waktu]. Terima kasih."</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- 3) Perkuliahan -->
+  <section id="kul" class="page-break">
+    <h2><span class="emoji-icon">🏫</span> 3) Perkuliahan & Nilai</h2>
+    
+    <div class="scenario-container">
+      <div class="scenario-title">21. Izin Sakit</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM], kelas [Matkul]. Mohon izin tidak dapat mengikuti perkuliahan hari ini karena sakit. Surat dokter akan saya susulkan. Mohon info jika ada tugas pengganti. Terima kasih.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">22. Izin Terlambat Masuk Kelas</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Mohon maaf saya akan terlambat sekitar [menit] ke kelas [Matkul] dikarenakan [alasan darurat: ban bocor/macet parah]. Saya tetap akan berusaha sampai secepatnya. Mohon izinnya.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">23. Mengumpulkan Tugas Telat</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Mohon maaf saya terlambat mengumpulkan tugas [Nama Tugas]. Berikut saya lampirkan file tugas saya: [tautan]. Saya menerima segala konsekuensi pengurangan nilai. Terima kasih atas pengertian Bapak/Ibu.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">24. Komplain Nilai (Sopan)</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Saya [Nama], [NIM]. Mohon izin bertanya terkait nilai mata kuliah [Matkul]. Di portal tercantum [Nilai], sedangkan perhitungan saya berdasarkan silabus seharusnya [Nilai]. Apakah saya boleh meminta rinciannya untuk evaluasi diri? Terima kasih.”</p>
+      </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">25. Permohonan Remedial</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Terkait nilai UTS/UAS saya yang belum memenuhi standar, apakah Bapak/Ibu membuka kesempatan remedial atau tugas tambahan? Saya bersedia mengerjakan untuk memperbaiki nilai. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">26. Meminta Materi Kuliah (Slide/Rekaman)</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Maaf mengganggu. Apakah materi presentasi minggu lalu boleh dibagikan kepada mahasiswa untuk bahan belajar mandiri? Terima kasih sebelumnya."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">27. Konfirmasi Jadwal Pengganti</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mewakili kelas [Matkul], izin memastikan untuk jadwal kuliah pengganti apakah fiks dilaksanakan pada [Hari, Jam]? Agar kami bisa meminjam ruang kelas. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">28. Izin Meninggalkan Kelas Lebih Awal</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon izin, pada pertemuan hari ini saya harus meninggalkan kelas pukul [Jam] dikarenakan [Alasan Urgent]. Saya akan meminjam catatan teman untuk materi yang tertinggal. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">29. Menanyakan Kejelasan Tugas Kelompok</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Terkait tugas kelompok [Topik], apakah format laporannya harus [Format A] atau boleh [Format B]? Mohon arahannya agar tidak salah persepsi. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">30. Nilai Belum Keluar di Portal</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon maaf, saya [Nama], [NIM]. Saya cek di portal nilai mata kuliah [Matkul] saya masih kosong. Apakah ada berkas tugas saya yang terlewat? Terima kasih."</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- 4) Komunikasi Umum -->
+  <section id="umum" class="page-break">
+    <h2><span class="emoji-icon">🤝</span> 4) Komunikasi Umum & Etika</h2>
+
+    <div class="scenario-container">
+      <div class="scenario-title">31. Ucapan Hari Raya (Idul Fitri/Natal)</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Assalamualaikum/Selamat Pagi, Pak/Bu [Nama]. Selamat Hari Raya [Idul Fitri/Natal]. Mohon maaf lahir batin. Semoga Bapak/Ibu dan keluarga senantiasa sehat dan bahagia. Salam dari saya, [Nama].”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">32. Ucapan Terima Kasih Akhir Semester</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Saya [Nama], mahasiswa kelas [Matkul]. Terima kasih banyak atas ilmu dan bimbingan Bapak/Ibu selama satu semester ini. Sangat bermanfaat bagi saya. Semoga Bapak/Ibu sehat selalu.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">33. Permohonan Maaf Salah Kirim Pesan/Typo</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Mohon maaf Pak/Bu, pesan sebelumnya terkirim tidak sengaja/ada kesalahan pengetikan. Maksud saya adalah [koreksi]. Mohon dimaklumi. Terima kasih.”</p>
+      </div>
+    </div>
+
+    <div class="scenario-container">
+      <div class="scenario-title">34. Follow-up Pesan (Tanpa Spam)</div>
+      <div class="chat-bubble">
+      <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Izin menindaklanjuti pesan saya pada tanggal [Tanggal] terkait [Topik]. Jika Bapak/Ibu sudah ada waktu luang, mohon arahannya. Terima kasih.”</p>
+      </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">35. Menanyakan Ketersediaan Waktu Telepon</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Terkait revisi yang cukup kompleks, apakah Bapak/Ibu berkenan jika saya telepon sebentar untuk penjelasan lebih detail? Mohon info waktu yang nyaman. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">36. Mengirim File Besar (Drive)</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Dikarenakan file tugas/skripsi ukurannya cukup besar, berikut saya lampirkan link Google Drive-nya: [Link]. Akses sudah saya buka. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">37. Izin Bertemu Langsung (Offline)</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Apakah hari [Hari] Bapak/Ibu berada di kampus? Saya bermaksud menghadap sebentar untuk konsultasi [Topik]. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">38. Balasan Dosen "Oke" / "Y"</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Baik, Pak/Bu. Terima kasih atas konfirmasinya. Saya akan segera laksanakan. Selamat beraktivitas kembali."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">39. Menanyakan Kabar Dosen Sakit</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mendengar kabar Bapak/Ibu sedang kurang sehat. Semoga lekas pulih dan bisa beraktivitas kembali. Untuk jadwal kuliah/bimbingan, kami siap menunggu kabar selanjutnya. Syafakallah/Get well soon Pak/Bu."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">40. Undangan Mengisi Seminar/Acara</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Kami dari [Organisasi] bermaksud mengundang Bapak/Ibu menjadi Narasumber di acara [Nama Acara] pada [Tanggal]. Proposal kegiatan terlampir: [Link]. Besar harapan kami Bapak/Ibu berkenan. Terima kasih."</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- 5) Penelitian & Magang -->
+  <section id="riset" class="page-break">
+    <h2><span class="emoji-icon">🧪</span> 5) Penelitian & Magang</h2>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">41. Meminta Dosen Pembimbing Magang</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu [Nama]. Saya [Nama], [NIM]. Mohon kesediaan Bapak/Ibu untuk menjadi Dosen Pembimbing Magang saya di [Nama Perusahaan]. Berikut deskripsi singkat kegiatannya: [Link]. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">42. Konsultasi Judul PKM/Lomba</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Saya berencana mengikuti lomba [Nama Lomba]. Mohon izin meminta review singkat Bapak/Ibu terkait ide judul: [Judul]. Apakah relevan dengan tren saat ini? Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">43. Permintaan Data Sekunder dari Dosen</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Terkait penelitian payung, apakah saya diperbolehkan mengakses data [Jenis Data] tahun lalu? Data tersebut sangat krusial untuk analisis saya. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">44. Izin Survey Lapangan</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Minggu depan saya berencana pengambilan data lapangan ke [Lokasi] selama [Durasi]. Mohon doa restu dan izinnya. Saya akan tetap update progress via email. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">45. Mengajukan Mitra Magang Baru</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Saya mendapat tawaran magang di [Perusahaan Baru] yang belum ada di list mitra kampus. Apakah prosedurnya bisa saya urus mandiri? Mohon arahannya. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">46. Laporan Akhir Magang</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Saya telah menyelesaikan magang di [Perusahaan]. Berikut draft laporan akhir dan lembar penilaian dari supervisor: [Link]. Mohon arahan untuk jadwal ujian/seminar magang. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">47. Validasi Instrumen Penelitian</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon kesediaan Bapak/Ibu menjadi validator ahli untuk kuesioner penelitian saya. Berkas instrumen: [Link]. Masukan Bapak/Ibu sangat berarti. Terima kasih."</p>
+        </div>
+    </div>
+
+    <div class="scenario-container">
+        <div class="scenario-title">48. Mengajak Dosen Publikasi Bersama</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Berdasarkan hasil skripsi saya, saya berencana submit ke jurnal [Nama Jurnal]. Apakah Bapak/Ibu berkenan menjadi co-author dan mereview naskahnya? Terima kasih."</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- 6) Kondisi Khusus -->
+  <section id="khusus" class="page-break">
+    <h2><span class="emoji-icon">🚨</span> 6) Kondisi Khusus</h2>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">49. Berita Duka Keluarga</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon maaf saya izin tidak masuk beberapa hari ke depan dikarenakan Ayah/Ibu saya meninggal dunia. Saya akan segera kembali setelah urusan keluarga selesai. Mohon pengertiannya. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">50. Masalah Keuangan (Tunggakan UKT)</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon maaf mengganggu. Saya mengalami kendala finansial untuk pembayaran UKT semester ini. Apakah ada saran jalur penundaan atau beasiswa yang bisa saya akses? Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">51. Kesehatan Mental / Burnout</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon maaf, kondisi kesehatan mental saya sedang menurun drastis minggu ini dan disarankan istirahat oleh psikolog. Saya izin rehat sejenak dari bimbingan, saya akan kembali segera setelah pulih. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">52. Laptop Rusak / Data Hilang</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Mohon maaf sekali, laptop saya mengalami kerusakan harddisk sehingga data skripsi saya terganggu. Saya butuh waktu [Hari] untuk recovery data. Mohon maklum atas keterlambatan revisi ini. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">53. Bencana Alam / Sinyal Mati</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Di daerah saya sedang terjadi banjir/pemadaman listrik total. Saya izin terlambat submit tugas karena kendala sinyal. Akan saya kirim secepatnya saat akses pulih. Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">54. Konflik dengan Teman Sekelompok</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Izin berkonsultasi terkait tugas kelompok. Ada kendala pembagian kerja yang macet di tim kami. Apakah Bapak/Ibu berkenan memediasi atau memberi saran solusi? Terima kasih."</p>
+        </div>
+    </div>
+    
+    <div class="scenario-container">
+        <div class="scenario-title">55. Mengundurkan Diri dari Mata Kuliah/Proyek</div>
+        <div class="chat-bubble">
+        <p class="copy-text">"Selamat [pagi/siang], Pak/Bu. Dengan berat hati, saya mengajukan pengunduran diri dari proyek [Nama] dikarenakan jadwal yang bentrok dengan KKN/Magang. Saya akan menyelesaikan kewajiban yang tersisa sebelum keluar. Mohon izinnya. Terima kasih."</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- 7) Jalur Anti-Ghosting -->
+  <section id="ladder" class="page-break">
+    <h2><span class="emoji-icon">📈</span> 7) Strategi Follow-Up (Anti-Ghosting)</h2>
+    <p class="muted">Kunci agar dibalas: Sopan, Beri Jeda, dan To The Point.</p>
+
+    <div class="callout">
+      <strong>⚠️ Aturan Emas:</strong> Jangan spam "P" atau stiker nangis. Gunakan jeda waktu berikut:
+    </div>
+
+    <h3>Tahap 1: Kirim Pesan Utama (H-0)</h3>
+    <p>Gunakan template di atas sesuai kebutuhan. Pastikan salam, identitas, dan tujuan jelas.</p>
+
+    <h3>Tahap 2: Follow-up Ringan (H+2 atau H+3)</h3>
+    <div class="chat-bubble">
+    <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Mohon maaf mengganggu. Izin menanyakan kembali perihal pesan saya sebelumnya [sebutkan topik singkat]. Apakah ada hal yang perlu saya lengkapi? Terima kasih.”</p>
+    </div>
+
+    <h3>Tahap 3: Beri Opsi (H+5)</h3>
+    <div class="chat-bubble">
+    <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Terkait draft skripsi saya, jika Bapak/Ibu sedang sibuk untuk membaca detail, apakah boleh saya minta review untuk Bab 4-nya saja dulu? Atau saya menghadap ke kampus? Saya menyesuaikan. Terima kasih.”</p>
+    </div>
+
+    <h3>Tahap 4: Jalur Darurat (H+7 / Deadline Mepet)</h3>
+    <div class="chat-bubble">
+    <p class="copy-text">“Selamat [pagi/siang], Pak/Bu. Mohon maaf sekali, dikarenakan deadline pengumpulan berkas dari akademik adalah besok lusa, saya sangat memohon konfirmasi Bapak/Ibu. Jika belum memungkinkan, saya izin menghubungi Kaprodi untuk konsultasi prosedur administrasi. Terima kasih banyak, Pak/Bu.”</p>
+    </div>
+  </section>
+
+  <!-- 8) Etika -->
+  <section id="etika" class="page-break">
+    <h2><span class="emoji-icon">✨</span> 8) Panduan Etika Chat Dosen</h2>
+    <ul>
+      <li><b>Waktu:</b> Chat di jam kerja (Senin-Jumat, 08.00 - 16.00). Hindari weekend atau di atas jam 8 malam.</li>
+      <li><b>Profil WA:</b> Pastikan foto profil WA kamu sopan (wajah jelas), bukan anime atau meme aneh.</li>
+      <li><b>Nama File:</b> Jangan kirim file "Revisi_Final_BGT_Jir.pdf". Gunakan: <code>NIM_Nama_Judul_Tanggal.pdf</code></li>
+      <li><b>To The Point:</b> Dosen sibuk. Jangan "Assalamualaikum Pak" (lalu diam nunggu dijawab). Langsung sampaikan salam + identitas + tujuan dalam satu balon chat.</li>
+    </ul>
+
+    <!-- REPLACEMENT: CONCLUSION -->
+    <div style="margin-top: 50px; text-align: center; padding: 40px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; color: #334155;">
+      <h3 style="margin-top: 0; color: #1e3a8a;">🎓 Penutup</h3>
+      <p style="font-size: 11pt; line-height: 1.6;">
+        Skripsi bukan hanya tentang seberapa pintar kamu, tapi seberapa tangguh mentalmu untuk bertahan. <br>
+        Semoga template ini bisa sedikit meringankan beban komunikasimu, sehingga kamu bisa fokus pada isi skripsimu.
+      </p>
+      <p style="font-weight: 600; margin-top: 20px;">
+        Tetap semangat, jaga kesehatan mental, dan percaya bahwa setiap "Revisi" adalah satu langkah lebih dekat menuju "ACC".
+      </p>
+      <div style="margin-top: 30px; font-size: 10pt; color: #94a3b8;">
+        Sukses selalu!<br>
+        — Tim Template Skripsi
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
